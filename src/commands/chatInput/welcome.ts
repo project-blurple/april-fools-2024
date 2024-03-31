@@ -29,7 +29,7 @@ export default {
 
         Want it to be shown on your profile? Click Project Blurple on the top left of your screen, and then click Linked Roles. You'll see a new role called "Love" - click it to link it to your profile. You'll see your rank, love points, and messages sent during this event. Good luck! 🍀
       `,
-      embeds: [await createLeaderboard()],
+      embeds: await createLeaderboard(),
     });
 
     await getGlobal().then(glob => {
