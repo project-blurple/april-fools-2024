@@ -1,0 +1,27 @@
+name: Docker Image
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  ghcr:
+    name: ${{ github.ref == 'refs/heads/main' && 'Build and Push' || 'Test Build' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ${{ github.ref == 'refs/heads/main' && 'Build and Push' || 'Test Build' }}
+        uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5
+        with:
+            push: ${{ github.ref == 'refs/heads/main' }}
+            tags: ghcr.io/project-blurple/april-fools-2024:latest

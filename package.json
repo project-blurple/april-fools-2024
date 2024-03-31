@@ -1,0 +1,62 @@
+{
+  "name": "april-fools-2024",
+  "main": "build",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "docker": "npm run docker:build && npm run docker:up",
+    "docker:build": "docker-compose --project-directory . build",
+    "docker:down": "docker-compose --project-directory . down",
+    "docker:logs": "docker-compose --project-directory . logs --tail=500 -f",
+    "docker:start": "npm run docker:up",
+    "docker:stop": "npm run docker:down",
+    "docker:up": "docker-compose --project-directory . up -d",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start": "node .",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@sapphire/type": "2.4.4",
+    "@typegoose/typegoose": "12.2.0",
+    "bufferutil": "4.0.8",
+    "dedent": "1.5.1",
+    "discord-oauth2": "2.12.1",
+    "discord.js": "14.14.1",
+    "dotenv": "16.4.5",
+    "erlpack": "github:discord/erlpack",
+    "express": "4.19.2",
+    "mongoose": "8.2.4",
+    "sentiment": "5.0.2",
+    "superagent": "8.1.2",
+    "utf-8-validate": "6.0.3",
+    "winston": "3.13.0",
+    "winston-daily-rotate-file": "5.0.0",
+    "zlib-sync": "0.1.9"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "20.1.4",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/express": "4.17.21",
+    "@types/jest": "29.5.12",
+    "@types/node": "20.12.2",
+    "@types/sentiment": "5.0.4",
+    "@types/superagent": "8.1.6",
+    "eslint": "8.57.0",
+    "eslint-config-promise": "github:promise/eslint-config",
+    "jest": "29.7.0",
+    "ts-jest": "29.1.2",
+    "typescript": "5.4.3"
+  },
+  "eslintConfig": {
+    "extends": "promise"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/"
+    ]
+  }
+}

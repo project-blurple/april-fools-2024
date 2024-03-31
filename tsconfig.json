@@ -1,0 +1,8 @@
+{
+  "include": [ "./src" ],
+  "extends": ["@tsconfig/node20", "@tsconfig/strictest"],
+  "compilerOptions": {
+    "outDir": "./build",
+    "experimentalDecorators": true
+  }
+}
