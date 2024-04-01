@@ -1,4 +1,4 @@
-import { Colors, type APIEmbed, type Client } from "discord.js";
+import type { APIEmbed, Client } from "discord.js";
 import config from "../../config";
 import getGlobal from "../../database/global";
 import { Love } from "../../database/love";
@@ -22,8 +22,6 @@ export default function handleLeaderboard(client: Client<true>): void {
 export async function createLeaderboard(): Promise<APIEmbed[]> {
   const allLove = await Love.find();
   const sorted = allLove.sort((a, b) => b.points - a.points);
-  const allHate = allLove.filter(love => love.points < 0);
-  const hateSorted = allHate.sort((a, b) => a.points - b.points);
 
   return [
     {
@@ -32,13 +30,6 @@ export async function createLeaderboard(): Promise<APIEmbed[]> {
         .map((love, index) => `**${index + 1}.** <@${love.userId}> - ${love.points} points, ${love.messages} messages`)
         .join("\n") || "*Leaderboard is empty - waiting for love!*",
       color: config.themeColor,
-    },
-    {
-      title: "HATE Leaderboard 😡",
-      description: hateSorted.slice(0, 10)
-        .map((love, index) => `**${index + 1}.** <@${love.userId}> - ${love.points} points, ${love.messages} messages`)
-        .join("\n") || "*Leaderboard is empty - there's only love ❤️*",
-      color: Colors.Red,
     },
   ];
 }

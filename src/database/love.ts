@@ -17,8 +17,8 @@ export class LoveSchema {
   @prop({ type: Number, default: 0 }) messages!: number;
   @prop({ type: OAuthSchema, default: null }) oauth!: OAuthSchema | null;
   get points(): number {
-    // this.negativePoints is a negative number so we add them together instead of subtracting
-    return this.positivePoints + this.negativePoints;
+    // so, people wanted to be the most hateful so i reverted this back to only being positive points
+    return this.positivePoints;
   }
 
   // we can't save in parallell, and although we can await the guild.save(), that would not work across files.
